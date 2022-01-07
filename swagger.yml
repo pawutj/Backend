@@ -1,0 +1,72 @@
+openapi: "3.0.2"
+info:
+  title: API Title
+  version: "1.0"
+tags:
+  - name: user
+  - name: product
+paths:
+  /api/users/findAll:
+    get:
+      tags:
+        - user
+      responses:
+        "200":
+          description: OK
+
+  /api/users/findById/{id}:
+    get:
+      tags:
+        - user
+      parameters:
+        - name: id
+          in: path
+      responses:
+        "200":
+          description: OK
+
+  /api/users/create:
+    post:
+      tags:
+        - user
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: OK
+
+  /api/products/findAll:
+    get:
+      tags:
+        - product
+      responses:
+        "200":
+          description: OK
+
+  /api/products/create:
+    post:
+      tags:
+        - product
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: integer
+                user_id:
+                  type: integer
+      responses:
+        "200":
+          description: OK
