@@ -1,8 +1,8 @@
 module.exports = {
   HOST: "localhost",
-  // USER: "root", add your username password mysql
-  // PASSWORD: "123456",
-  // DB: "godev",
+  USER: "godev",
+  PASSWORD: "godevpos",
+  DB: "godev",
   dialect: "mysql",
   pool: {
     max: 5,
