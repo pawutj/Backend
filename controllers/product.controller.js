@@ -4,7 +4,7 @@ const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
   const product = {
-    name: req.body.name,
+    product_name: req.body.product_name,
     price: req.body.price,
     user_id: req.body.user_id,
   };
