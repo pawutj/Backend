@@ -61,12 +61,29 @@ paths:
             schema:
               type: object
               properties:
-                name:
+                product_id:
+                  type: integer
+                reorder_level:
+                  type: integer
+                barcode:
+                  type: integer
+                product_name:
                   type: string
-                price:
+                unit_id: 
+                  type: integer
+                product_unit_in_stock: 
+                  type: integer
+                category_id:
                   type: integer
                 user_id:
                   type: integer
+                product_unit_price:
+                  type: integer
+                product_short_name:
+                  type: string
+                product_discount:
+                  type: integer
+
       responses:
         "200":
           description: OK
