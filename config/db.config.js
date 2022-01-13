@@ -1,6 +1,6 @@
 module.exports = {
   HOST: "localhost",
-  USER: "root",
+  USER: "godev",
   PASSWORD: "123456",
   DB: "godev",
   dialect: "mysql",
