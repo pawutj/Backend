@@ -6,7 +6,31 @@ tags:
   - name: user
   - name: product
   - name: product_category
+  - name: store
 paths:
+  /api/store/findAll:
+    get:
+      tags:
+        - store
+      responses:
+        "200":
+          description: OK
+  /api/store/create:
+    post:
+      tags:
+        - store
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                address:
+                  type: string
+      responses:
+        "200":
+          description: OK
+
   /api/users/findAll:
     get:
       tags:

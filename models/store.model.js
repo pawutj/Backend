@@ -8,7 +8,7 @@ module.exports = (sequelize, Sequelize) => {
       autoIncrement: true,
     },
 
-    addess: {
+    address: {
       type: Sequelize.STRING,
     },
   });
