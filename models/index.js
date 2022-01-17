@@ -17,9 +17,18 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 const db = { Sequelize, sequelize };
 db.User = require("./user.model.js")(sequelize, Sequelize);
 db.Product = require("./product.model.js")(sequelize, Sequelize);
+db.ProductCategory = require("./productCategory.model")(sequelize, Sequelize);
+
 db.User.hasMany(db.Product, {
   foreignKey: "product_id",
 });
 db.Product.belongsTo(db.User, { foreignKey: "user_id" });
+
+db.ProductCategory.hasMany(db.Product, {
+  foreignKey: "product_id",
+});
+db.Product.belongsTo(db.ProductCategory, {
+  foreignKey: "product_category_id",
+});
 
 module.exports = db;
