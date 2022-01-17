@@ -7,6 +7,7 @@ tags:
   - name: product
   - name: product_category
   - name: store
+  - name: stock
 paths:
   /api/store/findAll:
     get:
@@ -167,6 +168,34 @@ paths:
                   type: string
                 enable:
                   type: boolean
+      responses:
+        "200":
+          description: OK
+
+  /api/stock/findAll:
+    get:
+      tags:
+        - stock
+      responses:
+        "200":
+          description: OK
+
+  /api/stock/create:
+    post:
+      tags:
+        - stock
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: integer
+                quantity:
+                  type: integer
+                store_id:
+                  type: integer
       responses:
         "200":
           description: OK

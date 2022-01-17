@@ -20,6 +20,8 @@ require("./routes/user.routes")(app);
 require("./routes/product.routes")(app);
 require("./routes/productCategory.routes")(app);
 require("./routes/store.routes")(app);
+require("./routes/stock.routes")(app);
+
 const swaggerUi = require("swagger-ui-express");
 const YAML = require("yamljs");
 const swaggerDocument = YAML.load("./swagger.yml");
