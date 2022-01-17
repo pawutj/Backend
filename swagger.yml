@@ -110,6 +110,17 @@ paths:
         "200":
           description: OK
 
+  /api/products/delete/{product_id}:
+    delete:
+      tags:
+        - product
+      parameters:
+        - name: product_id
+          in: path
+      responses:
+        "200":
+          description: OK
+
   /api/productCategory/findAll:
     get:
       tags:

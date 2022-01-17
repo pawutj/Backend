@@ -7,5 +7,6 @@ module.exports = (app) => {
   router.post("/create", products.create);
   router.get("/findById/:product_id", products.findById);
   router.post("/update/:product_id", products.update);
+  router.delete("/delete/:product_id", products.delete);
   app.use("/api/products", router);
 };

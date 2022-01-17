@@ -79,4 +79,16 @@ exports.update = async (req, res) => {
   }
 };
 
-exports.delete = (req, res) => {};
+exports.delete = (req, res) => {
+  Product.destroy({
+    where: {
+      product_id: req.param("product_id"),
+    },
+  })
+    .then((data) => res.sendStatus(200))
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "error",
+      });
+    });
+};
