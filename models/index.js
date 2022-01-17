@@ -18,6 +18,7 @@ const db = { Sequelize, sequelize };
 db.User = require("./user.model.js")(sequelize, Sequelize);
 db.Product = require("./product.model.js")(sequelize, Sequelize);
 db.ProductCategory = require("./productCategory.model")(sequelize, Sequelize);
+db.Store = require("./store.model")(sequelize, Sequelize);
 
 db.User.hasMany(db.Product, {
   foreignKey: "product_id",
