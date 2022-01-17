@@ -68,6 +68,8 @@ paths:
                   type: integer
                 user_id:
                   type: integer
+                product_category_id:
+                  type: integer
       responses:
         "200":
           description: OK
@@ -76,6 +78,24 @@ paths:
     get:
       tags:
         - product_category
+      responses:
+        "200":
+          description: OK
+
+  /api/productCategory/create:
+    post:
+      tags:
+        - product_category
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                product_category:
+                  type: string
+                enable:
+                  type: boolean
       responses:
         "200":
           description: OK

@@ -4,7 +4,8 @@ const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
   const productCategory = {
-    product_name: req.body.product_category,
+    product_category: req.body.product_category,
+    enable: req.body.enable,
   };
 
   ProductCategory.create(productCategory)
