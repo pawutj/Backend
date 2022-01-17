@@ -38,4 +38,45 @@ exports.findAll = (req, res) => {
     });
 };
 
+exports.findById = (req, res) => {
+  Product.findOne({
+    where: { product_id: req.param("product_id") },
+  })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "error",
+      });
+    });
+};
+
+exports.update = async (req, res) => {
+  const product = {
+    product_name: req.body.product_name,
+    price: req.body.price,
+    user_id: req.body.user_id,
+    product_category_id: req.body.product_category_id,
+  };
+
+  try {
+    const oldProduct = await Product.findOne({
+      where: { product_id: req.param("product_id") },
+    });
+
+    oldProduct.set({
+      ...product,
+    });
+
+    const data = await oldProduct.save();
+
+    res.send(data);
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "error",
+    });
+  }
+};
+
 exports.delete = (req, res) => {};
