@@ -172,6 +172,38 @@ paths:
         "200":
           description: OK
 
+  /api/productCategory/update/{product_category_id}:
+    post:
+      tags:
+        - product_category
+      parameters:
+        - name: product_category_id
+          in: path
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                product_category:
+                  type: string
+                enable:
+                  type: boolean
+      responses:
+        "200":
+          description: OK 
+
+  /api/productCategory/delete/{product_category_id}:
+    delete:
+      tags:
+        - product_category
+      parameters:
+        - name: product_category_id
+          in: path
+      responses:
+        "200":
+          description: OK     
+
   /api/stock/findAll:
     get:
       tags:
