@@ -5,7 +5,33 @@ info:
 tags:
   - name: user
   - name: product
+  - name: product_category
+  - name: store
+  - name: stock
 paths:
+  /api/store/findAll:
+    get:
+      tags:
+        - store
+      responses:
+        "200":
+          description: OK
+  /api/store/create:
+    post:
+      tags:
+        - store
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                address:
+                  type: string
+      responses:
+        "200":
+          description: OK
+
   /api/users/findAll:
     get:
       tags:
@@ -66,6 +92,141 @@ paths:
                 price:
                   type: integer
                 user_id:
+                  type: integer
+                product_category_id:
+                  type: integer
+      responses:
+        "200":
+          description: OK
+
+  /api/products/update/{product_id}:
+    post:
+      tags:
+        - product
+      parameters:
+        - name: product_id
+          in: path
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                product_name:
+                  type: string
+                price:
+                  type: integer
+                user_id:
+                  type: integer
+                product_category_id:
+                  type: integer
+      responses:
+        "200":
+          description: OK
+
+  /api/products/findById/{product_id}:
+    get:
+      tags:
+        - product
+      parameters:
+        - name: product_id
+          in: path
+      responses:
+        "200":
+          description: OK
+
+  /api/products/delete/{product_id}:
+    delete:
+      tags:
+        - product
+      parameters:
+        - name: product_id
+          in: path
+      responses:
+        "200":
+          description: OK
+
+  /api/productCategory/findAll:
+    get:
+      tags:
+        - product_category
+      responses:
+        "200":
+          description: OK
+
+  /api/productCategory/create:
+    post:
+      tags:
+        - product_category
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                product_category:
+                  type: string
+                enable:
+                  type: boolean
+      responses:
+        "200":
+          description: OK
+
+  /api/productCategory/update/{product_category_id}:
+    post:
+      tags:
+        - product_category
+      parameters:
+        - name: product_category_id
+          in: path
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                product_category:
+                  type: string
+                enable:
+                  type: boolean
+      responses:
+        "200":
+          description: OK 
+
+  /api/productCategory/delete/{product_category_id}:
+    delete:
+      tags:
+        - product_category
+      parameters:
+        - name: product_category_id
+          in: path
+      responses:
+        "200":
+          description: OK     
+
+  /api/stock/findAll:
+    get:
+      tags:
+        - stock
+      responses:
+        "200":
+          description: OK
+
+  /api/stock/create:
+    post:
+      tags:
+        - stock
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: integer
+                quantity:
+                  type: integer
+                store_id:
                   type: integer
       responses:
         "200":
