@@ -5,5 +5,7 @@ module.exports = (app) => {
 
   router.get("/findAll", stock.findAll);
   router.post("/create", stock.create);
+  router.post("/update/:stock_id", stock.update);
+  router.post("/quantityAdjust/:stock_id", stock.quantityAdjust);
   app.use("/api/stock", router);
 };
