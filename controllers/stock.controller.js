@@ -58,6 +58,34 @@ exports.findAll = (req, res) => {
     });
 };
 
+exports.listQuantityAdd = async (req, res) => {
+  const quantityAddList = [{ stock_id: 1, add: 1 }];
+
+  try {
+    // const data = await Stock.increment("quantity", {
+    //   by: 1,
+    //   where: { stock_id: 1 },
+    // });
+    // res.send(data);
+
+    const data = await Promise.all([
+      Stock.increment("quantity", {
+        by: 1,
+        where: { stock_id: 1 },
+      }),
+      Stock.increment("quantity", {
+        by: 1,
+        where: { stock_id: 2 },
+      }),
+    ]);
+    res.send(data);
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "error",
+    });
+  }
+};
+
 exports.quantityAdjust = async (req, res) => {
   const adjust = {
     mode: req.body.mode,

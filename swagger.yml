@@ -275,3 +275,23 @@ paths:
       responses:
         "200":
           description: OK
+
+  /api/stock/listQuantityAdd:
+    post:
+      tags:
+        - stock
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  stock_id:
+                    type: string
+                  quantity:
+                    type: integer
+      responses:
+        "200":
+          description: OK
