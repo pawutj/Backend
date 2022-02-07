@@ -1,7 +1,7 @@
 const db = require("../models");
 const Stock = db.Stock;
 const Op = db.Sequelize.Op;
-
+const Product = db.Product;
 exports.create = (req, res) => {
   const stock = {
     quantity: req.body.quantity,
@@ -48,6 +48,24 @@ exports.update = async (req, res) => {
 
 exports.findAll = (req, res) => {
   Stock.findAll({})
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "error",
+      });
+    });
+};
+
+exports.findAllProduct = (req, res) => {
+  Stock.findAll({
+    include: [
+      {
+        model: Product,
+      },
+    ],
+  })
     .then((data) => {
       res.send(data);
     })

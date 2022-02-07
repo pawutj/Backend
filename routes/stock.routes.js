@@ -4,6 +4,7 @@ module.exports = (app) => {
   var router = require("express").Router();
 
   router.get("/findAll", stock.findAll);
+  router.get("/findAllProduct", stock.findAllProduct);
   router.post("/create", stock.create);
   router.post("/update/:stock_id", stock.update);
   router.post("/quantityAdjust/:stock_id", stock.quantityAdjust);

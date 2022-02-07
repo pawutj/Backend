@@ -212,6 +212,14 @@ paths:
         "200":
           description: OK
 
+  /api/stock/findAllProduct:
+    get:
+      tags:
+        - stock
+      responses:
+        "200":
+          description: OK
+
   /api/stock/create:
     post:
       tags:
