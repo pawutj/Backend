@@ -59,25 +59,24 @@ exports.findAll = (req, res) => {
 };
 
 exports.listQuantityAdd = async (req, res) => {
-  const quantityAddList = [{ stock_id: 1, add: 1 }];
+  // const quantityAddList = [
+  //   { stock_id: 1, quantity: 1 },
+  //   { stock_id: 1, quantity: 1 },
+  // ];
 
+  const quantityAddList = req.body;
   try {
-    // const data = await Stock.increment("quantity", {
-    //   by: 1,
-    //   where: { stock_id: 1 },
-    // });
-    // res.send(data);
+    const data = await Promise.all(
+      quantityAddList.map((quantityAdd) =>
+        Stock.increment(
+          { quantity: quantityAdd.quantity },
+          {
+            where: { stock_id: quantityAdd.stock_id },
+          }
+        )
+      )
+    );
 
-    const data = await Promise.all([
-      Stock.increment("quantity", {
-        by: 1,
-        where: { stock_id: 1 },
-      }),
-      Stock.increment("quantity", {
-        by: 1,
-        where: { stock_id: 2 },
-      }),
-    ]);
     res.send(data);
   } catch (err) {
     res.status(500).send({

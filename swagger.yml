@@ -282,16 +282,21 @@ paths:
         - stock
       requestBody:
         content:
-          application/x-www-form-urlencoded:
+          application/json:
             schema:
               type: array
               items:
-                type: object
-                properties:
-                  stock_id:
-                    type: string
-                  quantity:
-                    type: integer
+                $ref: "#/components/schemas/AddStockList"
       responses:
         "200":
           description: OK
+
+components:
+  schemas:
+    AddStockList:
+      type: object
+      properties:
+        stock_id:
+          type: string
+        quantity:
+          type: integer
