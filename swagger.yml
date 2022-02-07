@@ -259,6 +259,8 @@ paths:
                   type: integer
                 store_id:
                   type: integer
+                isEnable:
+                  type: boolean
       responses:
         "200":
           description: OK

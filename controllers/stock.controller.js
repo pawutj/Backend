@@ -2,6 +2,8 @@ const db = require("../models");
 const Stock = db.Stock;
 const Op = db.Sequelize.Op;
 const Product = db.Product;
+const removeNull = require("../utils");
+
 exports.create = (req, res) => {
   const stock = {
     quantity: req.body.quantity,
@@ -25,6 +27,7 @@ exports.update = async (req, res) => {
     quantity: req.body.quantity,
     store_id: req.body.store_id,
     product_id: req.body.product_id,
+    isEnable: req.body.isEnable,
   };
 
   try {
@@ -32,9 +35,7 @@ exports.update = async (req, res) => {
       where: { stock_id: req.param("stock_id") },
     });
 
-    oldStock.set({
-      ...stock,
-    });
+    oldStock.set({ ...oldStock, ...removeNull(stock) });
 
     const data = await oldStock.save();
 
