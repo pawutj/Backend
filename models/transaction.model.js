@@ -7,6 +7,9 @@ module.exports = (sequelize, Sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
+    quantity: {
+      type: Sequelize.INTEGER,
+    },
     cost: {
       type: Sequelize.INTEGER,
     },

@@ -8,6 +8,7 @@ tags:
   - name: product_category
   - name: store
   - name: stock
+  - name: transaction
 paths:
   /api/store/findAll:
     get:
@@ -297,6 +298,36 @@ paths:
               type: array
               items:
                 $ref: "#/components/schemas/AddStockList"
+      responses:
+        "200":
+          description: OK
+
+  /api/transaction/findAll:
+    get:
+      tags:
+        - transaction
+      responses:
+        "200":
+          description: OK
+
+  /api/transaction/create:
+    post:
+      tags:
+        - transaction
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: integer
+                quantity:
+                  type: integer
+                cost:
+                  type: integer
+                income:
+                  type: integer
       responses:
         "200":
           description: OK
