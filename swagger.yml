@@ -286,7 +286,7 @@ paths:
         "200":
           description: OK
 
-  /api/stock/listQuantityAdd:
+  /api/stock/addStock:
     post:
       tags:
         - stock

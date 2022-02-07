@@ -8,6 +8,6 @@ module.exports = (app) => {
   router.post("/create", stock.create);
   router.post("/update/:stock_id", stock.update);
   router.post("/quantityAdjust/:stock_id", stock.quantityAdjust);
-  router.post("/listQuantityAdd", stock.listQuantityAdd);
+  router.post("/addStock", stock.addStock);
   app.use("/api/stock", router);
 };
