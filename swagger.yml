@@ -337,7 +337,9 @@ components:
     AddStockList:
       type: object
       properties:
-        stock_id:
+        product_id:
           type: string
         quantity:
+          type: integer
+        cost:
           type: integer

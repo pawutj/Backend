@@ -32,3 +32,26 @@ exports.create = (req, res) => {
       });
     });
 };
+
+exports.createList = async (req, res) => {
+  const transactionAddList = req.body;
+  try {
+    const data = await Promise.all(
+      transactionAddList.map((transactionAdd) =>
+        Transaction.create({
+          product_id: transactionAdd.product_id,
+          quantity: transactionAdd.quantity,
+          cost: transactionAdd.cost,
+          income: 0,
+        })
+      )
+    );
+
+    //res.send(data);
+    return data;
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "error",
+    });
+  }
+};

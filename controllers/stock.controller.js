@@ -3,7 +3,8 @@ const Stock = db.Stock;
 const Op = db.Sequelize.Op;
 const Product = db.Product;
 const removeNull = require("../utils");
-
+const Transaction = db.Transaction;
+const transactionController = require("./transaction.controller");
 exports.create = (req, res) => {
   const stock = {
     quantity: req.body.quantity,
@@ -80,6 +81,7 @@ exports.findAllProduct = (req, res) => {
 exports.addStock = async (req, res) => {
   try {
     const data = await this.listQuantityAdjust(req, res);
+    const dataTransaction = await transactionController.createList(req, res);
     res.send(data);
   } catch (err) {
     res.status(500).send({
@@ -100,7 +102,7 @@ exports.listQuantityAdjust = async (req, res) => {
         Stock.increment(
           { quantity: quantityAdd.quantity },
           {
-            where: { stock_id: quantityAdd.stock_id },
+            where: { product_id: quantityAdd.product_id },
           }
         )
       )
