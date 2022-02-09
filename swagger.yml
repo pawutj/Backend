@@ -331,6 +331,21 @@ paths:
         "200":
           description: OK
 
+  /api/stock/sellStock:
+    post:
+      tags:
+        - stock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/SellStockList"
+      responses:
+        "200":
+          description: OK
+
   /api/transaction/findAll:
     get:
       tags:
@@ -373,6 +388,15 @@ components:
         cost:
           type: integer
     MissingStockList:
+      type: object
+      properties:
+        product_id:
+          type: string
+        quantity:
+          type: integer
+        income:
+          type: integer
+    SellStockList:
       type: object
       properties:
         product_id:

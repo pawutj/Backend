@@ -102,6 +102,18 @@ exports.missingStock = async (req, res) => {
   }
 };
 
+exports.sellStock = async (req, res) => {
+  try {
+    const data = await this.listQuantityRemove(req, res);
+    const dataTransaction = await transactionController.createList(req, res);
+    res.send(data);
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "error",
+    });
+  }
+};
+
 exports.listQuantityRemove = async (req, res) => {
   // const quantityAddList = [
   //   { stock_id: 1, quantity: 1 },

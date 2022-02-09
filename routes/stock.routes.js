@@ -10,5 +10,6 @@ module.exports = (app) => {
   router.post("/quantityAdjust/:stock_id", stock.quantityAdjust);
   router.post("/addStock", stock.addStock);
   router.post("/missingStock", stock.missingStock);
+  router.post("/sellStock", stock.sellStock);
   app.use("/api/stock", router);
 };
