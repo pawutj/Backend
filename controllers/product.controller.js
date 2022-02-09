@@ -5,6 +5,7 @@ exports.create = (req, res) => {
   const product = {
     product_name: req.body.product_name,
     price: req.body.price,
+    barcode: req.body.barcode,
     user_id: req.body.user_id,
     product_category_id: req.body.product_category_id,
   };
@@ -38,6 +39,17 @@ exports.findAll = (req, res) => {
     });
 };
 
+exports.findByBarcode = async (req, res) => {
+  try {
+    const product = await Product.findOne({
+      where: { barcode: req.param("barcode") },
+    });
+    res.send(product);
+  } catch (err) {
+    res.status(500).send({ message: err.message || "error" });
+  }
+};
+
 exports.findById = (req, res) => {
   Product.findOne({
     where: { product_id: req.param("product_id") },
@@ -56,6 +68,7 @@ exports.update = async (req, res) => {
   const product = {
     product_name: req.body.product_name,
     price: req.body.price,
+    barcode: req.body.barcode,
     user_id: req.body.user_id,
     product_category_id: req.body.product_category_id,
   };

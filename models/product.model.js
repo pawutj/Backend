@@ -15,6 +15,10 @@ module.exports = (sequelize, Sequelize) => {
     price: {
       type: Sequelize.INTEGER,
     },
+
+    barcode: {
+      type: Sequelize.STRING,
+    },
   });
 
   return Product;
