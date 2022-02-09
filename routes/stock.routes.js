@@ -9,5 +9,6 @@ module.exports = (app) => {
   router.post("/update/:stock_id", stock.update);
   router.post("/quantityAdjust/:stock_id", stock.quantityAdjust);
   router.post("/addStock", stock.addStock);
+  router.post("/missingStock", stock.missingStock);
   app.use("/api/stock", router);
 };

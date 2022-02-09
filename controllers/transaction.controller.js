@@ -42,7 +42,7 @@ exports.createList = async (req, res) => {
           product_id: transactionAdd.product_id,
           quantity: transactionAdd.quantity,
           cost: transactionAdd.cost,
-          income: 0,
+          income: transactionAdd.income,
         })
       )
     );

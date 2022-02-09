@@ -90,6 +90,45 @@ exports.addStock = async (req, res) => {
   }
 };
 
+exports.missingStock = async (req, res) => {
+  try {
+    const data = await this.listQuantityRemove(req, res);
+    const dataTransaction = await transactionController.createList(req, res);
+    res.send(data);
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "error",
+    });
+  }
+};
+
+exports.listQuantityRemove = async (req, res) => {
+  // const quantityAddList = [
+  //   { stock_id: 1, quantity: 1 },
+  //   { stock_id: 1, quantity: 1 },
+  // ];
+  const quantityAddList = req.body;
+  try {
+    const data = await Promise.all(
+      quantityAddList.map((quantityAdd) =>
+        Stock.decrement(
+          { quantity: quantityAdd.quantity },
+          {
+            where: { product_id: quantityAdd.product_id },
+          }
+        )
+      )
+    );
+
+    //res.send(data);
+    return data;
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "error",
+    });
+  }
+};
+
 exports.listQuantityAdjust = async (req, res) => {
   // const quantityAddList = [
   //   { stock_id: 1, quantity: 1 },
