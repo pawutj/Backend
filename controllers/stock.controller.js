@@ -5,6 +5,7 @@ const Product = db.Product;
 const removeNull = require("../utils");
 const Transaction = db.Transaction;
 const transactionController = require("./transaction.controller");
+
 exports.create = (req, res) => {
   const stock = {
     quantity: req.body.quantity,
@@ -21,6 +22,60 @@ exports.create = (req, res) => {
         message: err.message || "error",
       });
     });
+};
+
+exports.setIsEnable = async (req, res) => {
+  const [stock, created] = await Stock.findOrCreate({
+    where: { product_id: req.body.product_id },
+    defaults: {
+      quantity: 0,
+      isEnable: true,
+      store_id: 1,
+    },
+  });
+  console.log(!created);
+  if (!created) {
+    try {
+      const result = await Stock.update(
+        { isEnable: req.body.isEnable },
+        { where: { product_id: req.body.product_id } }
+      );
+
+      res.send(result);
+    } catch (err) {
+      res.status(500).send({
+        message: err.message || "error",
+      });
+    }
+  } else {
+    res.send(stock);
+  }
+};
+
+exports.createService = async (req, res) => {
+  Stock.create(stock)
+    .then((data) => {
+      return data;
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "error",
+      });
+    });
+};
+
+exports.setIsEnableService = async (req, res) => {
+  try {
+    const data = await Stock.update(
+      { isEnable: req.body.isEnable },
+      { where: { product_id: req.body.product_id } }
+    );
+    return data;
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "error",
+    });
+  }
 };
 
 exports.update = async (req, res) => {

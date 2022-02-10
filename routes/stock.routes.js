@@ -11,5 +11,6 @@ module.exports = (app) => {
   router.post("/addStock", stock.addStock);
   router.post("/missingStock", stock.missingStock);
   router.post("/sellStock", stock.sellStock);
+  router.post("/setIsEnable", stock.setIsEnable);
   app.use("/api/stock", router);
 };
