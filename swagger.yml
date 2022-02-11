@@ -8,6 +8,7 @@ tags:
   - name: product_category
   - name: store
   - name: stock
+  - name: transaction
 paths:
   /api/store/findAll:
     get:
@@ -91,10 +92,13 @@ paths:
                   type: string
                 price:
                   type: integer
+                barcode:
+                  type: string
                 user_id:
                   type: integer
                 product_category_id:
                   type: integer
+
       responses:
         "200":
           description: OK
@@ -116,6 +120,8 @@ paths:
                   type: string
                 price:
                   type: integer
+                barcode:
+                  type: string
                 user_id:
                   type: integer
                 product_category_id:
@@ -130,6 +136,16 @@ paths:
         - product
       parameters:
         - name: product_id
+          in: path
+      responses:
+        "200":
+          description: OK
+  /api/products/findByBarcode/{barcode}:
+    get:
+      tags:
+        - product
+      parameters:
+        - name: barcode
           in: path
       responses:
         "200":
@@ -191,7 +207,7 @@ paths:
                   type: boolean
       responses:
         "200":
-          description: OK 
+          description: OK
 
   /api/productCategory/delete/{product_category_id}:
     delete:
@@ -202,9 +218,17 @@ paths:
           in: path
       responses:
         "200":
-          description: OK     
+          description: OK
 
   /api/stock/findAll:
+    get:
+      tags:
+        - stock
+      responses:
+        "200":
+          description: OK
+
+  /api/stock/findAllProduct:
     get:
       tags:
         - stock
@@ -231,3 +255,171 @@ paths:
       responses:
         "200":
           description: OK
+
+  /api/stock/update/{stock_id}:
+    post:
+      tags:
+        - stock
+      parameters:
+        - name: stock_id
+          in: path
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: integer
+                quantity:
+                  type: integer
+                store_id:
+                  type: integer
+                isEnable:
+                  type: boolean
+      responses:
+        "200":
+          description: OK
+
+  /api/stock/quantityAdjust/{stock_id}:
+    post:
+      tags:
+        - stock
+      parameters:
+        - name: stock_id
+          in: path
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: string
+                quantityUpdate:
+                  type: integer
+      responses:
+        "200":
+          description: OK
+
+  /api/stock/setIsEnable:
+    post:
+      tags:
+        - stock
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: string
+                isEnable:
+                  type: boolean
+      responses:
+        "200":
+          description: OK
+
+  /api/stock/addStock:
+    post:
+      tags:
+        - stock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/AddStockList"
+      responses:
+        "200":
+          description: OK
+  /api/stock/missingStock:
+    post:
+      tags:
+        - stock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/MissingStockList"
+      responses:
+        "200":
+          description: OK
+
+  /api/stock/sellStock:
+    post:
+      tags:
+        - stock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/SellStockList"
+      responses:
+        "200":
+          description: OK
+
+  /api/transaction/findAll:
+    get:
+      tags:
+        - transaction
+      responses:
+        "200":
+          description: OK
+
+  /api/transaction/create:
+    post:
+      tags:
+        - transaction
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: integer
+                quantity:
+                  type: integer
+                cost:
+                  type: integer
+                income:
+                  type: integer
+      responses:
+        "200":
+          description: OK
+
+components:
+  schemas:
+    AddStockList:
+      type: object
+      properties:
+        product_id:
+          type: string
+        quantity:
+          type: integer
+        cost:
+          type: integer
+    MissingStockList:
+      type: object
+      properties:
+        product_id:
+          type: string
+        quantity:
+          type: integer
+        income:
+          type: integer
+    SellStockList:
+      type: object
+      properties:
+        product_id:
+          type: string
+        quantity:
+          type: integer
+        income:
+          type: integer

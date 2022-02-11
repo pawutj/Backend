@@ -1,25 +1,22 @@
 const { sequelize, Sequelize } = require(".");
 
 module.exports = (sequelize, Sequelize) => {
-  const Product = sequelize.define("product", {
-    product_id: {
+  const Transaction = sequelize.define("transaction", {
+    transaction_id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-
-    product_name: {
-      type: Sequelize.STRING,
-    },
-
-    price: {
+    quantity: {
       type: Sequelize.INTEGER,
     },
-
-    barcode: {
-      type: Sequelize.STRING,
+    cost: {
+      type: Sequelize.INTEGER,
+    },
+    income: {
+      type: Sequelize.INTEGER,
     },
   });
 
-  return Product;
+  return Transaction;
 };

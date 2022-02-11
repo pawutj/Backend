@@ -11,6 +11,10 @@ module.exports = (sequelize, Sequelize) => {
     quantity: {
       type: Sequelize.INTEGER,
     },
+
+    isEnable: {
+      type: Sequelize.BOOLEAN,
+    },
   });
 
   return Stock;
